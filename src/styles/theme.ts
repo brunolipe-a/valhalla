@@ -18,6 +18,9 @@ const customTheme = extendTheme({
       }
     })
   },
+  shadows: {
+    base: '0px 1px 3px 0px rgba(54,74,99,0.05)'
+  },
   textStyles: {
     heading: {
       textAlign: 'center',
