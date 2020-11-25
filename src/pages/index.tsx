@@ -13,6 +13,10 @@ import {
 
 import Head from 'next/head'
 
+import { AnimatePresence, motion } from 'framer-motion'
+
+const MotionBox = motion.custom(Box)
+
 export default function Home() {
   const [openSideNav, setOpenSideNav] = useState(true)
   const [overlay, setOverlay] = useState(false)
@@ -76,8 +80,26 @@ export default function Home() {
           />
         </Flex>
       </Flex>
+      <AnimatePresence>
+        {overlay && (
+          <MotionBox
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            display={{ base: 'block', lg: 'none' }}
+            position="fixed"
+            top={0}
+            right={0}
+            bottom={0}
+            left={0}
+            zIndex={900}
+            bg="rgba(16,25,36,0.4)"
+            onClick={toggleSideNav}
+          />
+        )}
+      </AnimatePresence>
       {overlay && (
-        <Box
+        <MotionBox
           display={{ base: 'block', lg: 'none' }}
           position="fixed"
           top={0}
