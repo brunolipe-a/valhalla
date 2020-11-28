@@ -1,17 +1,25 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
+import {
+  HamburgerIcon,
+  MoonIcon,
+  SunIcon,
+  ArrowForwardIcon
+} from '@chakra-ui/icons'
 import {
   Box,
   Button,
   Flex,
   IconButton,
+  position,
   useBreakpointValue,
   useColorMode,
-  useColorModeValue
+  useColorModeValue,
+  VStack
 } from '@chakra-ui/react'
 
 import Head from 'next/head'
+import Image from 'next/image'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -48,38 +56,60 @@ export default function Home() {
         <title>Dashboard</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex
+      <VStack
         w={sideNavWidth}
         minH="100vh"
         zIndex={999}
         overflow="hidden"
         shadow="base"
-        align="center"
         direction="column"
-        py={4}
         bg={useColorModeValue('white', 'gray.800')}
         transform={{
           base: openSideNav ? 'translateX(0)' : 'translateX(-100%)',
           lg: 'translateX(0)'
         }}
+        py={4}
         position="fixed"
         transition="width 450ms ease, transform 450ms ease"
         borderRight="1px solid"
         borderRightColor={useColorModeValue('gray.200', 'whiteAlpha.100')}
       >
+        <Flex justify="center" px={6} align="center">
+          <AnimatePresence>
+            {openSideNav && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{ alignItems: 'center', display: 'flex' }}
+              >
+                <Image
+                  src="/logo.svg"
+                  alt="App Icon"
+                  width="auto"
+                  height={40}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <IconButton
+            ml={openSideNav ? 8 : 0}
+            aria-label="Hamburger"
+            rounded="full"
+            icon={!lgBreakingPoint ? <HamburgerIcon /> : <ArrowForwardIcon />}
+            onClick={toggleSideNav}
+          />
+        </Flex>
+
         <Flex justify="center" wrap="wrap">
           <IconButton
             aria-label="Toggle Theme"
             onClick={toggleColorMode}
             icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           />
-          <IconButton
-            aria-label="Hamburger"
-            icon={<HamburgerIcon />}
-            onClick={toggleSideNav}
-          />
         </Flex>
-      </Flex>
+      </VStack>
       <AnimatePresence>
         {overlay && (
           <MotionBox
@@ -93,24 +123,11 @@ export default function Home() {
             bottom={0}
             left={0}
             zIndex={900}
-            bg="rgba(16,25,36,0.4)"
+            bg="blackAlpha.300"
             onClick={toggleSideNav}
           />
         )}
       </AnimatePresence>
-      {overlay && (
-        <MotionBox
-          display={{ base: 'block', lg: 'none' }}
-          position="fixed"
-          top={0}
-          right={0}
-          bottom={0}
-          left={0}
-          zIndex={900}
-          bg="rgba(16,25,36,0.4)"
-          onClick={toggleSideNav}
-        />
-      )}
       <Flex
         pl={sideNavMargin}
         w="100%"
@@ -135,6 +152,7 @@ export default function Home() {
           borderBottomColor={useColorModeValue('gray.200', 'whiteAlpha.100')}
         >
           <IconButton
+            display={{ base: 'block', lg: 'none' }}
             aria-label="Hamburger"
             icon={<HamburgerIcon />}
             onClick={toggleSideNav}
