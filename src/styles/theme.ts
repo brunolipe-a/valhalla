@@ -2,6 +2,11 @@ import { extendTheme } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
 
 const customTheme = extendTheme({
+  colors: {
+    brand: {
+      500: '#6c6cff'
+    }
+  },
   styles: {
     global: props => ({
       body: {

@@ -9,9 +9,9 @@ import {
 import {
   Box,
   Button,
+  Text,
   Flex,
   IconButton,
-  position,
   useBreakpointValue,
   useColorMode,
   useColorModeValue,
@@ -24,6 +24,7 @@ import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const MotionBox = motion.custom(Box)
+const MotionText = motion.custom(Text)
 
 export default function Home() {
   const [openSideNav, setOpenSideNav] = useState(true)
@@ -57,24 +58,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <VStack
+        zIndex={999}
         w={sideNavWidth}
         minH="100vh"
-        zIndex={999}
+        py={4}
+        position="fixed"
+        direction="column"
         overflow="hidden"
         shadow="base"
-        direction="column"
         bg={useColorModeValue('white', 'gray.800')}
+        borderRight="1px solid"
+        borderRightColor={useColorModeValue('gray.200', 'whiteAlpha.100')}
+        transition="width 450ms ease, transform 450ms ease"
         transform={{
           base: openSideNav ? 'translateX(0)' : 'translateX(-100%)',
           lg: 'translateX(0)'
         }}
-        py={4}
-        position="fixed"
-        transition="width 450ms ease, transform 450ms ease"
-        borderRight="1px solid"
-        borderRightColor={useColorModeValue('gray.200', 'whiteAlpha.100')}
       >
-        <Flex justify="center" px={6} align="center">
+        <Flex px={6} justify="center" align="center">
           <AnimatePresence>
             {openSideNav && (
               <motion.div
@@ -94,20 +95,26 @@ export default function Home() {
           </AnimatePresence>
 
           <IconButton
-            ml={openSideNav ? 8 : 0}
             aria-label="Hamburger"
             rounded="full"
+            ml={openSideNav ? 8 : 0}
             icon={!lgBreakingPoint ? <HamburgerIcon /> : <ArrowForwardIcon />}
             onClick={toggleSideNav}
           />
         </Flex>
-
-        <Flex justify="center" wrap="wrap">
-          <IconButton
-            aria-label="Toggle Theme"
+        <Flex justify="center" w="100%" px={6}>
+          <Button
+            w="100%"
+            justifyContent="flex-start"
+            px={3}
             onClick={toggleColorMode}
-            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-          />
+            leftIcon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            color={useColorModeValue('brand.500', 'whiteAlpha.800')}
+          >
+            <MotionText animate={{ opacity: +openSideNav }}>
+              Tema {colorMode === 'light' ? 'Escuro' : 'Claro'}
+            </MotionText>
+          </Button>
         </Flex>
       </VStack>
       <AnimatePresence>
