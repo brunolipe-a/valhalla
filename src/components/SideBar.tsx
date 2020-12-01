@@ -2,7 +2,7 @@ import {
   HamburgerIcon,
   MoonIcon,
   SunIcon,
-  ArrowLeftIcon
+  ArrowBackIcon
 } from '@chakra-ui/icons'
 import {
   Button,
@@ -69,7 +69,7 @@ function SideBar() {
           aria-label="Toggle SideBar"
           rounded="full"
           ml={openSideBar ? 8 : 0}
-          icon={!lgBreakingPoint ? <HamburgerIcon /> : <ArrowLeftIcon />}
+          icon={!lgBreakingPoint ? <HamburgerIcon /> : <ArrowBackIcon />}
           onClick={toggleSideBar}
         />
       </Flex>
