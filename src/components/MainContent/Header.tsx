@@ -1,10 +1,39 @@
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { Flex, IconButton, useColorModeValue } from '@chakra-ui/react'
+import { useEffect } from 'react'
+
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
+import {
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  IconButton,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure,
+  VStack
+} from '@chakra-ui/react'
+
+import Image from 'next/image'
 
 import { useLayout } from '~/context/layout'
 
 function Header() {
-  const { sideBarMargin, toggleSideBar } = useLayout()
+  const { sideBarMargin } = useLayout()
+
+  const { colorMode, toggleColorMode } = useColorMode()
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure()
+
+  const { isLessThanLG } = useLayout()
+
+  useEffect(() => {
+    if (!isLessThanLG && isOpen) {
+      console.log('opa')
+      onToggle()
+    }
+  })
 
   return (
     <Flex
@@ -26,9 +55,36 @@ function Header() {
       <IconButton
         display={{ base: 'block', lg: 'none' }}
         aria-label="Hamburger"
-        icon={<HamburgerIcon />}
-        onClick={toggleSideBar}
+        variant="ghost"
+        icon={<HamburgerIcon boxSize={6} />}
+        onClick={onOpen}
       />
+      <Drawer
+        placement={'left'}
+        preserveScrollBarGap
+        onClose={onClose}
+        isOpen={!isLessThanLG ? false : isOpen}
+      >
+        <DrawerOverlay>
+          <DrawerContent
+            borderRightColor={useColorModeValue('gray.200', 'whiteAlpha.100')}
+          >
+            <DrawerBody as={VStack}>
+              <Image src="/logo.svg" alt="App Logo" width={200} height={40} />
+              <Button
+                w="100%"
+                justifyContent="flex-start"
+                px={3}
+                onClick={toggleColorMode}
+                leftIcon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                color={useColorModeValue('brand.500', 'whiteAlpha.800')}
+              >
+                <Text>Tema {colorMode === 'light' ? 'Escuro' : 'Claro'}</Text>
+              </Button>
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
     </Flex>
   )
 }

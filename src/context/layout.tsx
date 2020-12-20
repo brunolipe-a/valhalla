@@ -1,21 +1,10 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react'
+import { createContext, useContext, useMemo } from 'react'
 
 import { useBreakpointValue } from '@chakra-ui/react'
 
 type LayoutContextValue = {
-  sideBarWidth: number
   sideBarMargin: number
-  openSideBar: boolean
-  overlay: boolean
-  lgBreakingPoint: boolean
-  toggleSideBar(): void
+  isLessThanLG: boolean
 }
 
 const LayoutContext = createContext<LayoutContextValue>(
@@ -23,38 +12,15 @@ const LayoutContext = createContext<LayoutContextValue>(
 )
 
 function LayoutProvider({ children }: WithChildren) {
-  const [openSideBar, setOpenSideBar] = useState(true)
-  const [overlay, setOverlay] = useState(false)
+  const isLessThanLG = useBreakpointValue({ base: true, lg: false })
 
-  const lgBreakingPoint = useBreakpointValue({ base: true, lg: false })
-
-  const sideBarWidth = useMemo(() => (openSideBar ? 290 : 74), [openSideBar])
-  const sideBarMargin = useMemo(() => (lgBreakingPoint ? 0 : sideBarWidth), [
-    sideBarWidth,
-    lgBreakingPoint
-  ])
-
-  useEffect(() => {
-    setOpenSideBar(!lgBreakingPoint)
-    setOverlay(false)
-  }, [lgBreakingPoint])
-
-  const toggleSideBar = useCallback(() => {
-    if (lgBreakingPoint) {
-      setOverlay(!openSideBar)
-    }
-    setOpenSideBar(!openSideBar)
-  }, [lgBreakingPoint, openSideBar])
+  const sideBarMargin = useMemo(() => (isLessThanLG ? 0 : 320), [isLessThanLG])
 
   return (
     <LayoutContext.Provider
       value={{
         sideBarMargin,
-        openSideBar,
-        overlay,
-        sideBarWidth,
-        toggleSideBar,
-        lgBreakingPoint
+        isLessThanLG
       }}
     >
       {children}
@@ -63,9 +29,7 @@ function LayoutProvider({ children }: WithChildren) {
 }
 
 function useLayout(): LayoutContextValue {
-  const context = useContext(LayoutContext)
-
-  return context
+  return useContext(LayoutContext)
 }
 
 export { LayoutProvider, useLayout }

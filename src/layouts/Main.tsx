@@ -5,7 +5,6 @@ import Head from 'next/head'
 import MainContent from '~/components/MainContent'
 import Overlay from '~/components/Ovelay'
 import SideBar from '~/components/SideBar'
-
 const Main = () => {
   return (
     <Flex position="relative">
