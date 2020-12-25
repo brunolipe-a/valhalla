@@ -16,24 +16,16 @@ function SideBar() {
   const { sidebar } = useValhalla()
   const controls = useAnimation()
 
-  const sidebarVariants: Variants = {
-    active: {
-      x: 0
-    },
-    inactive: {
-      x: -sidebar.width
-    }
-  }
-
   useEffect(() => {
     controls.start(isLessThanLG ? 'inactive' : 'active')
   }, [controls, isLessThanLG])
 
   return (
     <MotionFlex
-      transition={{ type: 'spring', duration: 0.45 }}
-      animate={controls}
-      variants={sidebarVariants}
+      // transition={{ type: 'spring', duration: 0.45 }}
+      // initial={{ x: isLessThanLG ? -sidebar.width : 0 }}
+      // animate={{ x: isLessThanLG ? -sidebar.width : 0 }}
+      transform={`translateX(${isLessThanLG ? '-100%' : '0'})`}
       w={sidebar.width}
       zIndex={999}
       top={0}

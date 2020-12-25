@@ -29,9 +29,10 @@ function Header() {
 
   return (
     <MotionFlex
-      initial={{ left: sideBarMargin }}
-      animate={{ left: sideBarMargin }}
-      transition={{ type: 'spring', duration: 0.45 }}
+      // initial={{ left: sideBarMargin }}
+      // animate={{ left: sideBarMargin }}
+      // transition={{ type: 'spring', duration: 0.45 }}
+      left={sideBarMargin}
       align="center"
       h={65}
       minW={320}

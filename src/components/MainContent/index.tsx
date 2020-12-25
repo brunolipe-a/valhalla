@@ -14,9 +14,10 @@ function MainContent({ children }: WithChildren) {
 
   return (
     <MotionFlex
-      initial={{ paddingLeft: `${sideBarMargin}px` }}
-      animate={{ paddingLeft: `${sideBarMargin}px` }}
-      transition={{ type: 'spring', duration: 0.45 }}
+      // initial={{ paddingLeft: `${sideBarMargin}px` }}
+      // animate={{ paddingLeft: `${sideBarMargin}px` }}
+      // transition={{ type: 'spring', duration: 0.45 }}
+      pl={sideBarMargin}
       direction="column"
       minH="100vh"
       w="100%"
