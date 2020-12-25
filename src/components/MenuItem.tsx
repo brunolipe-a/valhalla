@@ -55,7 +55,7 @@ function ItemMenu({
           {Icon}
           <Text
             as="span"
-            letterSpacing="wide"
+            // letterSpacing="wide"
             fontSize="sm"
             ml={Icon ? 4 : 0}
             fontWeight={700}
@@ -98,7 +98,7 @@ function AccordionMenu({
             {Icon}
             <Flex
               flex="1"
-              letterSpacing="wide"
+              // letterSpacing="wide"
               fontSize="sm"
               ml={Icon ? 4 : 0}
               fontWeight={700}
@@ -128,7 +128,7 @@ function AccordionMenu({
                     {Icon}
                     <Text
                       as="span"
-                      letterSpacing="wide"
+                      // letterSpacing="wide"
                       fontSize="sm"
                       ml={Icon ? 4 : 0}
                     >
