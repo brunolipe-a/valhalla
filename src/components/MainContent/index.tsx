@@ -1,27 +1,32 @@
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
 
+import { motion } from 'framer-motion'
+
 import { useLayout } from '~/context/layout'
 
 import Footer from './Footer'
 import Header from './Header'
 
+const MotionFlex = motion.custom(Flex)
+
 function MainContent({ children }: WithChildren) {
   const { sideBarMargin } = useLayout()
 
   return (
-    <Flex
-      pl={sideBarMargin}
-      w="100%"
+    <MotionFlex
+      initial={{ paddingLeft: `${sideBarMargin}px` }}
+      animate={{ paddingLeft: `${sideBarMargin}px` }}
+      transition={{ type: 'spring', duration: 0.45 }}
       direction="column"
       minH="100vh"
-      transition="padding-left 450ms ease"
+      w="100%"
     >
       <Header />
-      <Box flex={1} pt="65px" bg={useColorModeValue('gray.100', 'gray.900')}>
+      <Box bg={useColorModeValue('gray.100', 'gray.900')} flex={1} pt="65px">
         {children}
       </Box>
       <Footer />
-    </Flex>
+    </MotionFlex>
   )
 }
 
