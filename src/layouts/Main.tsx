@@ -5,11 +5,15 @@ import Head from 'next/head'
 import MainContent from '~/components/MainContent'
 import SideBar from '~/components/SideBar'
 
-const Main = ({ children }: WithChildren) => {
+type MainProps = WithChildren & {
+  title: string
+}
+
+const Main = ({ children, title }: MainProps) => {
   return (
     <Flex position="relative">
       <Head>
-        <title>Dashboard</title>
+        <title>{title}</title>
       </Head>
       <DarkMode>
         <SideBar />

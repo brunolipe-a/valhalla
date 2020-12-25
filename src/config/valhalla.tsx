@@ -7,31 +7,33 @@ import {
   ChatIcon
 } from '@chakra-ui/icons'
 
-import { m } from 'framer-motion'
-
 export type MenuItem = {
   text: string
   isHeader?: boolean
   url?: string
   Icon?: React.ReactElement
-  route?: string
+  href?: string
   submenu?: MenuItem[]
+  isActive?: boolean
 }
 export type ValhallaConfig = {
   sidebar: {
     width: number
+    colorScheme: string
   }
   menu: MenuItem[]
 }
 
 const defaultConfig: ValhallaConfig = {
   sidebar: {
-    width: 290
+    width: 290,
+    colorScheme: 'teal'
   },
   menu: [
     {
       text: 'Default Dashboard',
-      Icon: <MoonIcon />
+      Icon: <MoonIcon />,
+      href: '/'
     },
     {
       text: 'Cript Dashboard',
@@ -54,18 +56,25 @@ const defaultConfig: ValhallaConfig = {
       Icon: <ChatIcon />,
       submenu: [
         {
-          text: 'opa'
+          text: 'Project Card'
+        },
+        {
+          text: 'Project List'
         }
       ]
     },
     {
       text: 'User Manager',
-      Icon: <SearchIcon />
-      // submenu: [
-      //   {
-      //     text: 'opa'
-      //   }
-      // ]
+      Icon: <SearchIcon />,
+      submenu: [
+        {
+          text: 'User List - Regular',
+          href: '/teste'
+        },
+        {
+          text: 'User List - Compact'
+        }
+      ]
     }
   ]
 }

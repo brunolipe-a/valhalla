@@ -4,9 +4,9 @@ import Main from '~/layouts/Main'
 
 export default function Home() {
   return (
-    <Main title="Dashboard">
+    <Main title="Teste">
       <Flex p={8}>
-        <Heading>Home</Heading>
+        <Heading>Teste</Heading>
       </Flex>
     </Main>
   )
