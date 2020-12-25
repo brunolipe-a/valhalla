@@ -4,6 +4,7 @@ import { mode } from '@chakra-ui/theme-tools'
 const customTheme = extendTheme({
   colors: {
     brand: {
+      400: '#7b7bff',
       500: '#6c6cff'
     }
   },

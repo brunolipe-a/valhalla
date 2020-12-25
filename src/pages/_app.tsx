@@ -1,14 +1,14 @@
 import { AppProps } from 'next/app'
 
 import { AppProvider } from '~/context'
-import { LayoutProvider } from '~/context/layout'
+import { ValhallaProvider } from '~/context/valhalla'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppProvider>
-      <LayoutProvider>
+      <ValhallaProvider>
         <Component {...pageProps} />
-      </LayoutProvider>
+      </ValhallaProvider>
     </AppProvider>
   )
 }

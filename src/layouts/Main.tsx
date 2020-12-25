@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { DarkMode, Flex } from '@chakra-ui/react'
 
 import Head from 'next/head'
 
@@ -11,7 +11,9 @@ const Main = ({ children }: WithChildren) => {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <SideBar />
+      <DarkMode>
+        <SideBar />
+      </DarkMode>
       <MainContent>{children}</MainContent>
     </Flex>
   )

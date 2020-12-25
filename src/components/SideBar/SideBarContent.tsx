@@ -1,28 +1,32 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { Button, Flex, Stack, Text, useColorMode } from '@chakra-ui/react'
+/* eslint-disable multiline-ternary */
+import { Accordion, Flex, Stack } from '@chakra-ui/react'
 
 import Image from 'next/image'
 
+import { useValhalla } from '~/context/valhalla'
+
+import MenuHeader from '../MenuHeader'
+import MenuItem from '../MenuItem'
+
 function SideBarContent() {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { menu } = useValhalla()
+
   return (
-    <Stack my={4}>
-      <Flex align="center" justify="center" px={6}>
+    <Stack as="ul" my={4}>
+      <Flex as="li" align="center" justify="center" px={6} mb={4}>
         <Flex align="center">
           <Image alt="App Logo" height={40} src="/logo.svg" width={200} />
         </Flex>
       </Flex>
-      <Flex justify="center" px={6} w="100%">
-        <Button
-          justifyContent="flex-start"
-          leftIcon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-          px={3}
-          w="100%"
-          onClick={toggleColorMode}
-        >
-          <Text>Tema {colorMode === 'light' ? 'Escuro' : 'Claro'}</Text>
-        </Button>
-      </Flex>
+      <Accordion allowToggle>
+        {menu.map((item, i) =>
+          item.isHeader ? (
+            <MenuHeader {...item} key={i} />
+          ) : (
+            <MenuItem {...item} key={i} />
+          )
+        )}
+      </Accordion>
     </Stack>
   )
 }
