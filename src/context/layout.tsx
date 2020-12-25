@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from 'react'
 
-import { useBreakpoint, useBreakpointValue } from '@chakra-ui/react'
+import { useBreakpointValue } from '@chakra-ui/react'
 
 import { useValhalla } from './valhalla'
 

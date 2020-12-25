@@ -26,6 +26,7 @@ function ValhallaDrawer({ onClose, isOpen }: ValhallaDrawerProps) {
     >
       <DrawerOverlay>
         <DrawerContent
+          bg={useColorModeValue('white', 'gray.800')}
           borderRightColor={useColorModeValue('gray.200', 'whiteAlpha.100')}
         >
           <SideBarContent />

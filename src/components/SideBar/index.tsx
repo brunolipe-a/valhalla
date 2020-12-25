@@ -1,8 +1,6 @@
-import { useEffect } from 'react'
-
 import { Flex, useColorModeValue } from '@chakra-ui/react'
 
-import { motion, useAnimation, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import { useLayout } from '~/context/layout'
 import { useValhalla } from '~/context/valhalla'
@@ -14,11 +12,6 @@ const MotionFlex = motion.custom(Flex)
 function SideBar() {
   const { isLessThanLG } = useLayout()
   const { sidebar } = useValhalla()
-  const controls = useAnimation()
-
-  useEffect(() => {
-    controls.start(isLessThanLG ? 'inactive' : 'active')
-  }, [controls, isLessThanLG])
 
   return (
     <MotionFlex

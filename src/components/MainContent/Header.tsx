@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import { HamburgerIcon } from '@chakra-ui/icons'
 import {
+  DarkMode,
   Flex,
   IconButton,
   useColorModeValue,
@@ -53,7 +54,9 @@ function Header() {
         variant="ghost"
         onClick={onOpen}
       />
-      <ValhallaDrawer isOpen={isOpen} onClose={onClose} />
+      <DarkMode>
+        <ValhallaDrawer isOpen={isOpen} onClose={onClose} />
+      </DarkMode>
     </MotionFlex>
   )
 }
